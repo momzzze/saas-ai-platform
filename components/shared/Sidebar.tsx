@@ -19,7 +19,7 @@ const Sidebar = () => {
         <nav className="sidebar-nav">
           <SignedIn>
             <ul className="sidebar-nav_elements">
-              {navLinks.map((link) => {
+              {navLinks.slice(0, 6).map((link) => {
                 const isActive = link.route === pathname;
                 return (
                   <li
@@ -31,7 +31,40 @@ const Sidebar = () => {
                     }`}
                   >
                     <Link className="sidebar-link" href={link.route}>
-                      <Image src={link.icon} alt="link" width={24} height={24} className={`${isActive&& 'brightness-200'}`}  /> {link.label}
+                      <Image
+                        src={link.icon}
+                        alt="link"
+                        width={24}
+                        height={24}
+                        className={`${isActive && "brightness-200"}`}
+                      />{" "}
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            <ul>
+              {navLinks.slice(6).map((link) => {
+                const isActive = link.route === pathname;
+                return (
+                  <li
+                    key={link.route}
+                    className={`sidebar-nav_element group ${
+                      isActive
+                        ? "bg-purple-gradient text-white"
+                        : "text-gray-700"
+                    }`}
+                  >
+                    <Link className="sidebar-link" href={link.route}>
+                      <Image
+                        src={link.icon}
+                        alt="link"
+                        width={24}
+                        height={24}
+                        className={`${isActive && "brightness-200"}`}
+                      />{" "}
+                      {link.label}
                     </Link>
                   </li>
                 );
@@ -43,9 +76,9 @@ const Sidebar = () => {
           </SignedIn>
 
           <SignedOut>
-              <Button asChild className="button bg-purple-gradient bg-cover">
-                <Link href='/sign-in'>Login</Link>
-              </Button>
+            <Button asChild className="button bg-purple-gradient bg-cover">
+              <Link href="/sign-in">Login</Link>
+            </Button>
           </SignedOut>
         </nav>
       </div>
